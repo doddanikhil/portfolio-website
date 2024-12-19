@@ -24,7 +24,9 @@ func main() {
 	r.POST("/projects", middleware.AuthMiddleware(), handlers.CreateProject)
 	r.PUT("/projects/:id", middleware.AuthMiddleware(), handlers.UpdateProject)
 	r.DELETE("/projects/:id", middleware.AuthMiddleware(), handlers.DeleteProject)
-
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{"message": "Welcome to the Portfolio API"})
+	})
 	// Start Server
 	r.Run(":8080")
 }

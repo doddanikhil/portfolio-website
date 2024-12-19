@@ -11,7 +11,9 @@ var RedisClient *redis.Client
 
 func InitializeRedis() {
 	RedisClient = redis.NewClient(&redis.Options{
-		Addr: "redis:6379",
+		Addr:     "redis:6379", // Redis service name in Docker
+		Password: "",           // Set the password here if Redis requires one
+		DB:       0,            // Default DB
 	})
 	_, err := RedisClient.Ping(context.Background()).Result()
 	if err != nil {

@@ -6,12 +6,24 @@ services:
       - "8080:8080"
     depends_on:
       - redis
+    networks:
+      - internal
+
   frontend:
     build: ./frontend
     ports:
       - "3000:3000"
+    networks:
+      - internal
+
   redis:
     build: ./redis
     ports:
       - "6379:6379"
+    networks:
+      - internal
+    command: ["redis-server", "--protected-mode", "no"]
 
+networks:
+  internal:
+    driver: bridge
